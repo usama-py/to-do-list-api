@@ -1,0 +1,28 @@
+register ids
+{
+    "username": "testuser",
+    "password": "testpassword",
+    "email":"testemail@mymail.com"
+}
+{
+    "username": "qwerty",
+    "password": "qwertypass",
+    "email":"qwertyemail@mymail.com"
+}
+
+
+
+create tasks
+{
+    "title": "Buy Groceries",
+    "description": "Go to the grocery store and buy milk, bread, and eggs."
+    "status": "todo"
+}
+update
+{
+  "title": "Updated task title",
+  "description": "its almost done",
+  "status": "done"
+}
+delete
+http://localhost:8000/tasks/1
