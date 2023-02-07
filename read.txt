@@ -1,0 +1,95 @@
+MYSQL database queries to create tables
+
+DATABASE NAME IS todo_list
+//////////////////////////////////////////////////////////////////////////////////////////
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT,
+    status ENUM("todo", "done") NOT NULL DEFAULT "todo",
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+STEP 1: REGISTER USER WITH JSON POST REQUEST
+
+register ids
+example 1
+{
+    "username": "testuser",
+    "password": "testpassword",
+    "email":"testemail@mymail.com"
+}
+example 2
+{
+    "username": "qwerty",
+    "password": "qwertypass",
+    "email":"qwertyemail@mymail.com"
+}
+
+
+
+STEP 2: PARSE A FORM ENTITY TO LOGIN AS THE REGISTERED USER WITH A POST REQUEST
+
+form should contain a username field and password field
+
+example:
+                username : qwerty
+                password : qwertypass
+
+
+
+STEP 3: CREATE TASKS OR TO DO LIST DATA WITH A JSON POST REQUEST 
+
+create tasks
+{
+    "title": "Buy Groceries",
+    "description": "Go to the grocery store and buy milk, bread, and eggs."
+    "status": "todo"
+}
+
+
+STEP 4: READ THE TODO OR DONE TASKS WITH GET REQUEST TO THE SERVER
+ example
+ http://localhost:8000/tasks -> GET
+
+
+
+STEP 5 : UPDATE THE DATABASE TASKS DESCRIPTION OR STATUS OR TITLE USING THE TASK ID
+DONE WITH POST REQUEST
+IF WRONG ID IS GIVEN THEN IT RETURNS 400 ERROR
+
+example
+http://localhost:8000/tasks/{task_id} -> POST
+{
+  "title": "Updated task title",
+  "description": "its almost done",
+  "status": "done"
+}
+
+
+
+SETP 6: DELETE TODO TASKS OR DONE TASKS WITH REFERENCE TO THEIR ids DONE WITH DELETE REQUEST 
+IF TASK DOESNT EXIST THEN ERROR IS GIVEN
+
+example
+
+http://localhost:8000/tasks/{task_id} -> DELETE
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+CAN IMPLEMENT ANY OF THE READ UPDATE DELETE ACTIONS AFTER CREATING TASKS SUCCESSFULLY
